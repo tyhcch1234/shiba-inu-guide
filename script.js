@@ -31,6 +31,12 @@
   /* ── 3. 進場動畫 ───────────────────────────────────────── */
   const reveals = document.querySelectorAll(".reveal");
 
+  /* 先確認 JS 正常執行，才啟用「先隱藏、再進場」嘅效果，
+     避免 JS 失效時整頁內容變空白 */
+  if (reveals.length && "IntersectionObserver" in window) {
+    document.documentElement.classList.add("reveal-ready");
+  }
+
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver(
       (entries) => {
